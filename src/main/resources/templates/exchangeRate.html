@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Kantor online</title>
+</head>
+<body>
+
+<h3>Lista kursów z dnia <span th:text="${date}"></span></h3>
+<a th:href="@{/calc/}">Przelicz kwotę</a>
+
+<table>
+    <thead>
+    <tr>
+        <td>Kraj</td>
+        <td>Kod</td>
+        <td>Kurs</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="rate, iterStat : ${respon}">
+        <td><span th:text="${rate.currency}"/></td>
+        <td><span th:text="${rate.code}"/></td>
+        <td><span th:text="${rate.mid}"/></td>
+    </tr>
+    </tbody>
+</table>
+
+
+</body>
+</html>

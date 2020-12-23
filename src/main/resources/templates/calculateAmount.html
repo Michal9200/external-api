@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Kantor online</title>
+</head>
+<body>
+
+<h3>Dziś jest <span th:text="${todayDate}"></span></h3>
+<a th:href="@{/calc/getAll/}">Kursy wszystkich walut</a>
+
+<form method="post" th:action="@{/calc/calcAmount}" th:object="${params}">
+
+    Kwota PLN: <input type="text" required th:field="*{amount}">
+    Kod waluty: <input type="text" required th:field="*{code}">
+    Data: <input type="date" required th:field="*{date}">
+
+    <input type="submit" value="Przelicz kwotę"/>
+</form>
+
+<h3>Po przeliczeniu <span th:text="${currency}"></span></h3>
+
+<h3 th:if=" ${ #lists.isEmpty(respon) }">Kursy z ostatnich 10 dni</h3>
+<table>
+    <thead>
+    <tr>
+        <td>Data</td>
+        <td>Kurs</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="rate, iterStat : ${respon}">
+        <td><span th:text="${rate.effectiveDate}"/></td>
+        <td><span th:text="${rate.mid}"/></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
